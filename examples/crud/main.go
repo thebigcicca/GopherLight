@@ -2,11 +2,12 @@ package main
 
 import (
 	"encoding/json"
-	"express-go/req"
-	"express-go/router"
 	"fmt"
 	"log"
 	"strconv"
+
+	"github.com/BrunoCiccarino/express-go/req"
+	"github.com/BrunoCiccarino/express-go/router"
 )
 
 type User struct {

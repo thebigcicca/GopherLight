@@ -1,9 +1,10 @@
 package main
 
 import (
-	"express-go/req"
-	"express-go/router"
 	"fmt"
+
+	"github.com/BrunoCiccarino/express-go/req"
+	"github.com/BrunoCiccarino/express-go/router"
 )
 
 // main sets up the application, defines a route that checks for an Authorization header,

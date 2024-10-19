@@ -1,8 +1,9 @@
 package router
 
 import (
-	"express-go/req"
 	"net/http"
+
+	"github.com/BrunoCiccarino/express-go/req"
 )
 
 type App struct {

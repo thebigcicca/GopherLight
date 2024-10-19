@@ -1,7 +1,7 @@
 package router
 
 import (
-	"express-go/req"
+	"github.com/BrunoCiccarino/express-go/req"
 )
 
 type Route struct {

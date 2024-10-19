@@ -1,10 +1,11 @@
 package router
 
 import (
-	"express-go/req"
 	"net/http"
 	"net/http/httptest"
 	"testing"
+
+	"github.com/BrunoCiccarino/express-go/req"
 )
 
 func TestAppRouteValid(t *testing.T) {

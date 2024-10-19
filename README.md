@@ -26,8 +26,8 @@ So, if you’re looking for a friendly and efficient way to build web apps in Go
 package main
 
 import (
-	"express-go/req"
-	"express-go/router"
+	"github.com/BrunoCiccarino/express-go/req"
+	"github.com/BrunoCiccarino/express-go/router"
 	"fmt"
 )
 
@@ -52,8 +52,8 @@ func main() {
 package main
 
 import (
-	"express-go/req"
-	"express-go/router"
+	"github.com/BrunoCiccarino/express-go/req"
+	"github.com/BrunoCiccarino/express-go/router"
 	"fmt"
 )
 
@@ -81,8 +81,8 @@ func main() {
 package main
 
 import (
-	"express-go/req"
-	"express-go/router"
+	"github.com/BrunoCiccarino/express-go/req"
+	"github.com/BrunoCiccarino/express-go/router"
 	"fmt"
 )
 
@@ -114,8 +114,8 @@ package main
 
 import (
 	"encoding/json"
-	"express-go/req"
-	"express-go/router"
+	"github.com/BrunoCiccarino/express-go/req"
+	"github.com/BrunoCiccarino/express-go/router"
 	"log"
 	"strconv"
     "fmt"
