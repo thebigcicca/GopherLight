@@ -1,6 +1,6 @@
 # express-go ![gopher1](./img/typing-furiously.gif)
 
-![GitHub License](https://img.shields.io/github/license/BrunoCiccarino/express-go?style=for-the-badge&color=blue&link=https%3A%2F%2Fgithub.com%2FBrunoCiccarino%2Fexpress-go%2Fblob%2Fmain%2FLICENSE) ![Go Reference](https://img.shields.io/badge/reference-grey?style=for-the-badge&logo=go&link=https%3A%2F%2Fgithub.com%2FBrunoCiccarino%2Fexpress-go) ![GitHub Repo stars](https://img.shields.io/github/stars/BrunoCiccarino/express-go) ![GitHub followers](https://img.shields.io/github/followers/BrunoCiccarino?link=https%3A%2F%2Fgithub.com%2FBrunoCiccarino) ![GitHub forks](https://img.shields.io/github/forks/BrunoCiccarino/express-go)
+![GitHub License](https://img.shields.io/github/license/BrunoCiccarino/express-go?style=for-the-badge&color=blue&link=https%3A%2F%2Fgithub.com%2FBrunoCiccarino%2Fexpress-go%2Fblob%2Fmain%2FLICENSE) ![Go Reference](https://img.shields.io/badge/reference-grey?style=for-the-badge&logo=go&link=https%3A%2F%2Fgithub.com%2FBrunoCiccarino%2Fexpress-go) ![pr's welcome](https://img.shields.io/badge/PR'S-WELCOME-green?style=for-the-badge) ![GitHub Repo stars](https://img.shields.io/github/stars/BrunoCiccarino/express-go) ![GitHub followers](https://img.shields.io/github/followers/BrunoCiccarino?link=https%3A%2F%2Fgithub.com%2FBrunoCiccarino) ![GitHub forks](https://img.shields.io/github/forks/BrunoCiccarino/express-go)
 
 
 ![gopher2](./img/gopher.png)
@@ -68,6 +68,38 @@ func main() {
 			"message": "Hello, JSON",
 		}
 		w.JSON(data) // Send the JSON response
+	})
+
+	fmt.Println("Server listening on port 3333")
+	app.Listen(":3333")
+}
+```
+
+### Using HTTP headers
+
+```go
+package main
+
+import (
+	"express-go/req"
+	"express-go/router"
+	"fmt"
+)
+
+// main sets up the application, defines a route that checks for an Authorization header,
+// and responds with an appropriate message based on the header's presence.
+// It listens on port 3333 and responds to the "/auth" path.
+func main() {
+	app := router.NewApp()
+
+	// Define a route that responds to a GET request at "/auth".
+	app.Route("/auth", func(r *req.Request, w *req.Response) {
+		authHeader := r.Header("Authorization")
+		if authHeader == "" {
+			w.Status(401).Send("Unauthorized")
+		} else {
+			w.Send("Authorized: " + authHeader)
+		}
 	})
 
 	fmt.Println("Server listening on port 3333")
@@ -218,8 +250,3 @@ func main() {
 	app.Listen(":3333")
 }
 ```
-
-### Donations ![gopher coin](./img/gopher-coin.png)
-
-![Donate with PayPal](https://img.shields.io/badge/Donate_with-PayPal-blue?style=for-the-badge&link=https%3A%2F%2Fwww.paypal.com%2Fdonate%2F%3Fbusiness%3DCLMGVDDTFLT3W%26no_recurring%3D0%26item_name%3Ddevelopment%26currency_code%3DBRL) ![Donate with PixMe](https://img.shields.io/badge/Donate_with-PixMe-green?style=for-the-badge&link=https%3A%2F%2Fimg.shields.io%2Fbadge%2Fdonate%2520on-pixme-1C1E26%3Fstyle%3Dfor-the-badge%26labelColor%3D1C1E26%26color%3D28f4f4)
-
