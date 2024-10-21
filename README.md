@@ -5,18 +5,18 @@
 
 ![gopher2](./img/gopher.png)
 
-### What is express-go?
-Hey there! So, you know how building web applications can sometimes feel like climbing a mountain? Well, express-go is like that cool hiking buddy who helps you navigate the trail, making things way easier and way more fun!
+### What is GopherLight?
+Hey there! So, you know how building web applications can sometimes feel like climbing a mountain? Well, GopherLight is like that cool hiking buddy who helps you navigate the trail, making things way easier and way more fun!
 
-express-go is a micro framework for Go (Golang) that brings a bit of the simplicity and flexibility of the popular Express.js framework from the Node.js world right to your Go projects. It’s perfect for those times when you want to whip up a web server or an API without getting bogged down in all the nitty-gritty details.
+GopherLight is a micro framework for Go (Golang) that brings a bit of the simplicity and flexibility of the popular Express.js framework from the Node.js world right to your Go projects. It’s perfect for those times when you want to whip up a web server or an API without getting bogged down in all the nitty-gritty details.
 
-Imagine you want to handle HTTP requests and create endpoints to manage users—just like in a classic CRUD (Create, Read, Update, Delete) app. With express-go, you can define your routes and handlers in a snap. No need to wrestle with the standard net/http package; instead, you get a clean and straightforward way to manage your routes and responses.
+Imagine you want to handle HTTP requests and create endpoints to manage users—just like in a classic CRUD (Create, Read, Update, Delete) app. GopherLight, you can define your routes and handlers in a snap. No need to wrestle with the standard net/http package; instead, you get a clean and straightforward way to manage your routes and responses.
 
 The cool part? You get to focus on writing your application logic while the framework handles the heavy lifting under the hood. Need to add a new route? Just call a method and pass in your handler. Want to send a JSON response? Easy peasy!
 
 Plus, it’s lightweight, so it won’t weigh down your application. You get all the goodies of a modern web framework while keeping things simple and fast. Whether you're a seasoned pro or just dipping your toes into web development, express-go makes it a breeze to get your ideas off the ground.
 
-So, if you’re looking for a friendly and efficient way to build web apps in Go, express-go is your new best friend. Grab your backpack, and let’s hit the trail!
+So, if you’re looking for a friendly and efficient way to build web apps in Go, GopherLight is your new best friend. Grab your backpack, and let’s hit the trail!
 
 ## Examples:
 
@@ -26,8 +26,8 @@ So, if you’re looking for a friendly and efficient way to build web apps in Go
 package main
 
 import (
-	"github.com/BrunoCiccarino/express-go/req"
-	"github.com/BrunoCiccarino/express-go/router"
+	"github.com/BrunoCiccarino/GopherLight/req"
+	"github.com/BrunoCiccarino/GopherLight/router"
 	"fmt"
 )
 
@@ -52,8 +52,8 @@ func main() {
 package main
 
 import (
-	"github.com/BrunoCiccarino/express-go/req"
-	"github.com/BrunoCiccarino/express-go/router"
+	"github.com/BrunoCiccarino/GopherLight/req"
+	"github.com/BrunoCiccarino/GopherLight/router"
 	"fmt"
 )
 
@@ -81,8 +81,8 @@ func main() {
 package main
 
 import (
-	"github.com/BrunoCiccarino/express-go/req"
-	"github.com/BrunoCiccarino/express-go/router"
+	"github.com/BrunoCiccarino/GopherLight/req"
+	"github.com/BrunoCiccarino/GopherLight/router"
 	"fmt"
 )
 
@@ -107,15 +107,15 @@ func main() {
 }
 ```
 
-### Crud example using express-go
+### Crud example using GopherLight
 
 ```go
 package main
 
 import (
 	"encoding/json"
-	"github.com/BrunoCiccarino/express-go/req"
-	"github.com/BrunoCiccarino/express-go/router"
+	"github.com/BrunoCiccarino/GopherLight/req"
+	"github.com/BrunoCiccarino/GopherLight/router"
 	"log"
 	"strconv"
     "fmt"
