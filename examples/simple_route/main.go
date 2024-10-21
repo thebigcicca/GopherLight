@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 
-	"github.com/BrunoCiccarino/express-go/req"
-	"github.com/BrunoCiccarino/express-go/router"
+	"github.com/BrunoCiccarino/GopherLight/req"
+	"github.com/BrunoCiccarino/GopherLight/router"
 )
 
 // main sets up the application, defines a route, and starts the server.

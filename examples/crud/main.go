@@ -6,8 +6,8 @@ import (
 	"log"
 	"strconv"
 
-	"github.com/BrunoCiccarino/express-go/req"
-	"github.com/BrunoCiccarino/express-go/router"
+	"github.com/BrunoCiccarino/GopherLight/req"
+	"github.com/BrunoCiccarino/GopherLight/router"
 )
 
 type User struct {

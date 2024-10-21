@@ -5,7 +5,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/BrunoCiccarino/express-go/req"
+	"github.com/BrunoCiccarino/GopherLight/req"
 )
 
 func TestAppRouteValid(t *testing.T) {

@@ -3,7 +3,7 @@ package router
 import (
 	"net/http"
 
-	"github.com/BrunoCiccarino/express-go/req"
+	"github.com/BrunoCiccarino/GopherLight/req"
 )
 
 type App struct {

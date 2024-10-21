@@ -1,7 +1,7 @@
 package router
 
 import (
-	"github.com/BrunoCiccarino/express-go/req"
+	"github.com/BrunoCiccarino/GopherLight/req"
 )
 
 type Route struct {
