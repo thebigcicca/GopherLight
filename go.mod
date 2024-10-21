@@ -1,3 +1,3 @@
-module github.com/BrunoCiccarino/express-go
+module github.com/BrunoCiccarino/GopherLight
 
 go 1.23.1
