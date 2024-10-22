@@ -1,13 +1,15 @@
+### CRUD EXAMPLE
+
+```go
 package main
 
 import (
 	"encoding/json"
-	"fmt"
-	"log"
-	"strconv"
-
 	"github.com/BrunoCiccarino/GopherLight/req"
 	"github.com/BrunoCiccarino/GopherLight/router"
+	"log"
+	"strconv"
+    "fmt"
 )
 
 type User struct {
@@ -139,3 +141,4 @@ func main() {
 	fmt.Println("Server listening on port 3333")
 	app.Listen(":3333")
 }
+```

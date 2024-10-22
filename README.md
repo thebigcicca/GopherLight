@@ -18,21 +18,16 @@ Plus, it’s lightweight, so it won’t weigh down your application. You get all
 
 So, if you’re looking for a friendly and efficient way to build web apps in Go, GopherLight is your new best friend. Grab your backpack, and let’s hit the trail!
 
-## Examples:
+### Installation
 
-### Configuring a simple route and responding with a string
+```bash
+go get github.com/BrunoCiccarino/GopherLight/router
+go get github.com/BrunoCiccarino/GopherLight/req
+```
+
+### basic usage example
 
 ```go
-package main
-
-import (
-	"github.com/BrunoCiccarino/GopherLight/req"
-	"github.com/BrunoCiccarino/GopherLight/router"
-	"fmt"
-)
-
-// main sets up the application, defines a route, and starts the server.
-// It listens on port 3333 and responds to the "/hello" path with a plain text message.
 func main() {
 	app := router.NewApp()
 
@@ -46,208 +41,22 @@ func main() {
 }
 ```
 
-### Returning JSON data
+# Contribute
 
-```go
-package main
+That said, there's a bunch of ways you can contribute to this project, like by:
 
-import (
-	"github.com/BrunoCiccarino/GopherLight/req"
-	"github.com/BrunoCiccarino/GopherLight/router"
-	"fmt"
-)
+* ⭐ Giving a star on this repository (this is very important and costs nothing)
+* 🪲 Reporting a bug
+* 📄 Improving this [documentation](./docs/)
+* 🚨 Sharing this project and recommending it to your friends
+* 💻 Submitting a pull request to the official repository
 
-// main sets up the application and defines a route that returns JSON data.
-// It listens on port 3333 and responds to the "/json" path with a JSON object.
-func main() {
-	app := router.NewApp()
 
-	// Define a route that responds to a GET request at "/json".
-	app.Route("GET", "/json", func(r *req.Request, w *req.Response) {
-		data := map[string]string{
-			"message": "Hello, JSON",
-		}
-		w.JSON(data) // Send the JSON response
-	})
+## Contributors
 
-	fmt.Println("Server listening on port 3333")
-	app.Listen(":3333")
-}
-```
+This project exists thanks to all the people who contribute. 
 
-### Using HTTP headers
+<a href="https://github.com/BrunoCiccarino/GopherLight/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=BrunoCiccarino/GopherLight&max=24" />
+</a>
 
-```go
-package main
-
-import (
-	"github.com/BrunoCiccarino/GopherLight/req"
-	"github.com/BrunoCiccarino/GopherLight/router"
-	"fmt"
-)
-
-// main sets up the application, defines a route that checks for an Authorization header,
-// and responds with an appropriate message based on the header's presence.
-// It listens on port 3333 and responds to the "/auth" path.
-func main() {
-	app := router.NewApp()
-
-	// Define a route that responds to a GET request at "/auth".
-	app.Route("GET", "/auth", func(r *req.Request, w *req.Response) {
-		authHeader := r.Header("Authorization")
-		if authHeader == "" {
-			w.Status(401).Send("Unauthorized")
-		} else {
-			w.Send("Authorized: " + authHeader)
-		}
-	})
-
-	fmt.Println("Server listening on port 3333")
-	app.Listen(":3333")
-}
-```
-
-### Crud example using GopherLight
-
-```go
-package main
-
-import (
-	"encoding/json"
-	"github.com/BrunoCiccarino/GopherLight/req"
-	"github.com/BrunoCiccarino/GopherLight/router"
-	"log"
-	"strconv"
-    "fmt"
-)
-
-type User struct {
-	ID   int    `json:"id"`
-	Name string `json:"name"`
-	Age  int    `json:"age"`
-}
-
-var users = make(map[int]User)
-var nextID = 1
-
-// CreateUser adds a new user to the system.
-//
-// This function decodes user data from the request,
-// assigns a unique ID to the user and stores it in the in-memory "database".
-//
-// Parameters:
-//
-// req: The received request, containing user data in the request body.
-// res: The response to be sent, containing the status of the operation and the created user.
-//
-// Returns:
-//
-// Sends a JSON response with the created user data or an error if the input is invalid.
-func CreateUser(req *req.Request, res *req.Response) {
-	var user User
-	err := json.Unmarshal([]byte(req.BodyAsString()), &user)
-	if err != nil {
-		res.Status(400).Send("Invalid input")
-		log.Println("Error decoding JSON:", err)
-		return
-	}
-	user.ID = nextID
-	nextID++
-	users[user.ID] = user
-	res.Status(201).JSON(user)
-}
-
-// GetUser returns a user by their ID.
-//
-// Params:
-//
-// req: The received request (containing the user ID).
-// res: The response to be sent (containing the user or an error message).
-func GetUser(req *req.Request, res *req.Response) {
-	idParam := req.QueryParam("id")
-	id, err := strconv.Atoi(idParam)
-	if err != nil || id <= 0 {
-		res.Status(400).Send("Invalid user ID")
-		return
-	}
-
-	user, exists := users[id]
-	if !exists {
-		res.Status(404).Send("User not found")
-		return
-	}
-
-	res.Status(200).JSON(user)
-}
-
-// UpdateUser updates a user's data.
-//
-// Params:
-//
-// req: The received request (containing the new data).
-// res: The response to be sent (containing the updated status and user).
-func UpdateUser(req *req.Request, res *req.Response) {
-	idParam := req.QueryParam("id")
-	id, err := strconv.Atoi(idParam)
-	if err != nil || id <= 0 {
-		res.Status(400).Send("Invalid user ID")
-		return
-	}
-
-	var updatedUser User
-	err = json.Unmarshal([]byte(req.BodyAsString()), &updatedUser)
-	if err != nil {
-		res.Status(400).Send("Invalid input")
-		log.Println("Error decoding JSON:", err)
-		return
-	}
-
-	user, exists := users[id]
-	if !exists {
-		res.Status(404).Send("User not found")
-		return
-	}
-
-	user.Name = updatedUser.Name
-	user.Age = updatedUser.Age
-	users[id] = user
-
-	res.Status(200).JSON(user)
-}
-
-// DeleteUser removes a user by ID.
-//
-// Parameters:
-//
-// req: The received request (containing the user ID).
-// res: The response to be sent (success or error status).
-func DeleteUser(req *req.Request, res *req.Response) {
-	idParam := req.QueryParam("id")
-	id, err := strconv.Atoi(idParam)
-	if err != nil || id <= 0 {
-		res.Status(400).Send("Invalid user ID")
-		return
-	}
-
-	_, exists := users[id]
-	if !exists {
-		res.Status(404).Send("User not found")
-		return
-	}
-
-	delete(users, id)
-	res.Status(200).Send(fmt.Sprintf("User %d deleted", id))
-}
-
-func main() {
-	app := router.NewApp()
-
-	app.Route("POST", "/users/create", CreateUser)
-	app.Route("GET", "/users/get", GetUser)
-	app.Route("PUT", "/users/update", UpdateUser)
-	app.Route("DELETE", "/users/delete", DeleteUser)
-
-	fmt.Println("Server listening on port 3333")
-	app.Listen(":3333")
-}
-```
