@@ -1,19 +1,30 @@
+
+
 package main
 
 import (
-	"encoding/json"
-	"fmt"
-	"log"
-	"strconv"
+    "encoding/json"
+    "fmt"
+    "log"
+    "net/http"
+    "strconv"
 
-	"github.com/BrunoCiccarino/GopherLight/req"
-	"github.com/BrunoCiccarino/GopherLight/router"
+    "github.com/BrunoCiccarino/GopherLight/req"
+    "github.com/BrunoCiccarino/GopherLight/router"
 )
 
+// Middleware example: Logging middleware
+func loggingMiddleware(next http.HandlerFunc) http.HandlerFunc {
+    return func(w http.ResponseWriter, r *http.Request) {
+        fmt.Printf("Request: %s %s\n", r.Method, r.URL.Path)
+        next(w, r)
+    }
+}
+
 type User struct {
-	ID   int    `json:"id"`
-	Name string `json:"name"`
-	Age  int    `json:"age"`
+    ID   int    `json:"id"`
+    Name string `json:"name"`
+    Age  int    `json:"age"`
 }
 
 var users = make(map[int]User)
@@ -33,17 +44,17 @@ var nextID = 1
 //
 // Sends a JSON response with the created user data or an error if the input is invalid.
 func CreateUser(req *req.Request, res *req.Response) {
-	var user User
-	err := json.Unmarshal([]byte(req.BodyAsString()), &user)
-	if err != nil {
-		res.Status(400).Send("Invalid input")
-		log.Println("Error decoding JSON:", err)
-		return
-	}
-	user.ID = nextID
-	nextID++
-	users[user.ID] = user
-	res.Status(201).JSON(user)
+    var user User
+    err := json.Unmarshal([]byte(req.BodyAsString()), &user)
+    if err != nil {
+        res.Status(http.StatusBadRequest).JSONError("Invalid input")
+        log.Println("Error decoding JSON:", err)
+        return
+    }
+    user.ID = nextID
+    nextID++
+    users[user.ID] = user
+    res.Status(http.StatusCreated).JSON(user)
 }
 
 // GetUser returns a user by their ID.
@@ -53,20 +64,20 @@ func CreateUser(req *req.Request, res *req.Response) {
 // req: The received request (containing the user ID).
 // res: The response to be sent (containing the user or an error message).
 func GetUser(req *req.Request, res *req.Response) {
-	idParam := req.QueryParam("id")
-	id, err := strconv.Atoi(idParam)
-	if err != nil || id <= 0 {
-		res.Status(400).Send("Invalid user ID")
-		return
-	}
+    idParam := req.QueryParam("id")
+    id, err := strconv.Atoi(idParam)
+    if err != nil || id <= 0 {
+        res.Status(http.StatusBadRequest).JSONError("Invalid user ID")
+        return
+    }
 
-	user, exists := users[id]
-	if !exists {
-		res.Status(404).Send("User not found")
-		return
-	}
+    user, exists := users[id]
+    if !exists {
+        res.Status(http.StatusNotFound).JSONError("User not found")
+        return
+    }
 
-	res.Status(200).JSON(user)
+    res.JSON(user)
 }
 
 // UpdateUser updates a user's data.
@@ -76,32 +87,32 @@ func GetUser(req *req.Request, res *req.Response) {
 // req: The received request (containing the new data).
 // res: The response to be sent (containing the updated status and user).
 func UpdateUser(req *req.Request, res *req.Response) {
-	idParam := req.QueryParam("id")
-	id, err := strconv.Atoi(idParam)
-	if err != nil || id <= 0 {
-		res.Status(400).Send("Invalid user ID")
-		return
-	}
+    idParam := req.QueryParam("id")
+    id, err := strconv.Atoi(idParam)
+    if err != nil || id <= 0 {
+        res.Status(http.StatusBadRequest).JSONError("Invalid user ID")
+        return
+    }
 
-	var updatedUser User
-	err = json.Unmarshal([]byte(req.BodyAsString()), &updatedUser)
-	if err != nil {
-		res.Status(400).Send("Invalid input")
-		log.Println("Error decoding JSON:", err)
-		return
-	}
+    var updatedUser User
+    err = json.Unmarshal([]byte(req.BodyAsString()), &updatedUser)
+    if err != nil {
+        res.Status(http.StatusBadRequest).JSONError("Invalid input")
+        log.Println("Error decoding JSON:", err)
+        return
+    }
 
-	user, exists := users[id]
-	if !exists {
-		res.Status(404).Send("User not found")
-		return
-	}
+    user, exists := users[id]
+    if !exists {
+        res.Status(http.StatusNotFound).JSONError("User not found")
+        return
+    }
 
-	user.Name = updatedUser.Name
-	user.Age = updatedUser.Age
-	users[id] = user
+    user.Name = updatedUser.Name
+    user.Age = updatedUser.Age
+    users[id] = user
 
-	res.Status(200).JSON(user)
+    res.JSON(user)
 }
 
 // DeleteUser removes a user by ID.
@@ -111,31 +122,41 @@ func UpdateUser(req *req.Request, res *req.Response) {
 // req: The received request (containing the user ID).
 // res: The response to be sent (success or error status).
 func DeleteUser(req *req.Request, res *req.Response) {
-	idParam := req.QueryParam("id")
-	id, err := strconv.Atoi(idParam)
-	if err != nil || id <= 0 {
-		res.Status(400).Send("Invalid user ID")
-		return
-	}
+    idParam := req.QueryParam("id")
+    id, err := strconv.Atoi(idParam)
+    if err != nil || id <= 0 {
+        res.Status(http.StatusBadRequest).JSONError("Invalid user ID")
+        return
+    }
 
-	_, exists := users[id]
-	if !exists {
-		res.Status(404).Send("User not found")
-		return
-	}
+    _, exists := users[id]
+    if !exists {
+        res.Status(http.StatusNotFound).JSONError("User not found")
+        return
+    }
 
-	delete(users, id)
-	res.Status(200).Send(fmt.Sprintf("User %d deleted", id))
+    delete(users, id)
+    res.JSON(map[string]string{"message": fmt.Sprintf("User %d deleted", id)})
+}
+
+// Define the "/hello" route handler
+func HelloHandler(req *req.Request, res *req.Response) {
+    res.Send("Hello, World!")
 }
 
 func main() {
-	app := router.NewApp()
+    app := router.NewApp()
 
-	app.Route("POST", "/users/create", CreateUser)
-	app.Route("GET", "/users/get", GetUser)
-	app.Route("PUT", "/users/update", UpdateUser)
-	app.Route("DELETE", "/users/delete", DeleteUser)
+    // Use the logging middleware
+    app.Use(loggingMiddleware)
 
-	fmt.Println("Server listening on port 3333")
-	app.Listen(":3333")
+    // Register routes
+    app.Route("GET", "/hello", HelloHandler)
+    app.Route("POST", "/users/create", CreateUser)
+    app.Route("GET", "/users/get", GetUser)
+    app.Route("PUT", "/users/update", UpdateUser)
+    app.Route("DELETE", "/users/delete", DeleteUser)
+
+    fmt.Println("Server listening on port 3333")
+    app.Listen(":3333")
 }
