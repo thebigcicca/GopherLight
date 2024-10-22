@@ -37,7 +37,7 @@ func main() {
 	app := router.NewApp()
 
 	// Define a route that responds to a GET request at "/hello".
-	app.Route("/hello", func(r *req.Request, w *req.Response) {
+	app.Route("GET", "/hello", func(r *req.Request, w *req.Response) {
 		w.Send("Hello, World!")
 	})
 
@@ -63,7 +63,7 @@ func main() {
 	app := router.NewApp()
 
 	// Define a route that responds to a GET request at "/json".
-	app.Route("/json", func(r *req.Request, w *req.Response) {
+	app.Route("GET", "/json", func(r *req.Request, w *req.Response) {
 		data := map[string]string{
 			"message": "Hello, JSON",
 		}
@@ -93,7 +93,7 @@ func main() {
 	app := router.NewApp()
 
 	// Define a route that responds to a GET request at "/auth".
-	app.Route("/auth", func(r *req.Request, w *req.Response) {
+	app.Route("GET", "/auth", func(r *req.Request, w *req.Response) {
 		authHeader := r.Header("Authorization")
 		if authHeader == "" {
 			w.Status(401).Send("Unauthorized")
@@ -242,11 +242,12 @@ func DeleteUser(req *req.Request, res *req.Response) {
 func main() {
 	app := router.NewApp()
 
-	app.Route("/users/create", CreateUser)
-	app.Route("/users/get", GetUser)
-	app.Route("/users/update", UpdateUser)
-	app.Route("/users/delete", DeleteUser)
+	app.Route("POST", "/users/create", CreateUser)
+	app.Route("GET", "/users/get", GetUser)
+	app.Route("PUT", "/users/update", UpdateUser)
+	app.Route("DELETE", "/users/delete", DeleteUser)
 
+	fmt.Println("Server listening on port 3333")
 	app.Listen(":3333")
 }
 ```

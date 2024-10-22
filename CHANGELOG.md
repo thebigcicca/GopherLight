@@ -34,3 +34,15 @@ This is only version 0.1, so there's still a lot to go! We are working on:
 
 📝 Contributions
 This is an early version, and we are open to suggestions, improvements and contributions from the community. Feel free to explore the code, open issues, or submit PRs to make express-go even better!
+
+## [0.2] - 2024-10-21
+
+### Additions
+- **Support for multiple HTTP methods**: The framework now allows the routing of requests to HTTP methods such as GET, POST, PUT, DELETE and others, providing greater flexibility in defining routes.
+
+### Improvements
+- **HTTP method validation**: Implementation of validation to ensure that routes respond only to appropriate methods, increasing security and clarity when handling requests.
+
+### Changes
+- **Route function refactoring**: The function has been adjusted to accept and manage different HTTP methods efficiently.
+- **Documentation update**: The documentation has been revised and updated to reflect the new capabilities of the framework, including examples of use of the different HTTP methods.
