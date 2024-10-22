@@ -18,6 +18,16 @@ Plus, it’s lightweight, so it won’t weigh down your application. You get all
 
 So, if you’re looking for a friendly and efficient way to build web apps in Go, GopherLight is your new best friend. Grab your backpack, and let’s hit the trail!
 
+### Tasks
+
+- [x] router
+- [x] http requests
+- [x] manipulation of the methods (get, post, pu, delete ...)
+- [ ] middleware (authentication, timeout, anti csrf, etc...)
+- [ ] next func
+- [ ] more detailed error logs
+- [ ] More complete documentation
+
 ### Installation
 
 ```bash
