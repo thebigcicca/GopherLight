@@ -18,6 +18,9 @@ Plus, it’s lightweight, so it won’t weigh down your application. You get all
 
 So, if you’re looking for a friendly and efficient way to build web apps in Go, GopherLight is your new best friend. Grab your backpack, and let’s hit the trail!
 
+> [!WARNING]
+> We are in an initial beta version, so it is likely that the framework will change a lot, always stay up to date, with an updated version of your code using the framework.
+
 ### Tasks
 
 - [x] router
@@ -60,6 +63,7 @@ That said, there's a bunch of ways you can contribute to this project, like by:
 * 📄 Improving this [documentation](./docs/)
 * 🚨 Sharing this project and recommending it to your friends
 * 💻 Submitting a pull request to the official repository
+* ⚠️ Before making a pull request, it is important that you read our [doc](./docs/CONTRIBUTE.md)
 
 
 ## Contributors
