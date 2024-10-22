@@ -26,13 +26,8 @@ func (res *Response) JSON(data interface{}) {
 	res.Header().Set("Content-Type", "application/json")
 	jsonData, err := json.Marshal(data)
 	if err != nil {
-		res.Status(http.StatusInternalServerError).Send("Error encoding JSON")
+		res.Status(http.StatusInternalServerError).Send(`{"error": "Error encoding JSON"}`)
 		return
 	}
-
-	if res.Header().Get("Content-Type") == "" {
-		res.Header().Set("Content-Type", "application/json")
-	}
-
 	res.Write(jsonData)
 }

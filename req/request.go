@@ -11,7 +11,6 @@ type Request struct {
 }
 
 func NewRequest(req *http.Request) *Request {
-
 	bodyBytes, _ := io.ReadAll(req.Body)
 	bodyString := string(bodyBytes)
 
@@ -22,8 +21,7 @@ func NewRequest(req *http.Request) *Request {
 }
 
 func (r *Request) QueryParam(key string) string {
-	params := r.Req.URL.Query()
-	return params.Get(key)
+	return r.Req.URL.Query().Get(key)
 }
 
 func (r *Request) Header(key string) string {
