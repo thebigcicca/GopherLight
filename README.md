@@ -26,7 +26,7 @@ So, if you’re looking for a friendly and efficient way to build web apps in Go
 - [x] router
 - [x] http requests
 - [x] manipulation of the methods (get, post, pu, delete ...)
-- [ ] middleware (authentication, timeout, anti csrf, etc...)
+- [ ] middleware (authentication, ~~timeout~~, anti csrf, ~~logging~~, etc...)
 - [ ] next func
 - [ ] more detailed error logs
 - [ ] More complete documentation
@@ -36,11 +36,21 @@ So, if you’re looking for a friendly and efficient way to build web apps in Go
 ```bash
 go get github.com/BrunoCiccarino/GopherLight/router
 go get github.com/BrunoCiccarino/GopherLight/req
+go get github.com/BrunoCiccarino/GopherLight/middleware
 ```
 
 ### basic usage example
 
 ```go
+package main
+
+import (
+	"fmt"
+	"github.com/BrunoCiccarino/GopherLight/router"
+	"github.com/BrunoCiccarino/GopherLight/req"
+)
+
+
 func main() {
 	app := router.NewApp()
 
@@ -52,6 +62,13 @@ func main() {
 	fmt.Println("Server listening on port 3333")
 	app.Listen(":3333")
 }
+```
+
+### basic use middlewares
+
+```go
+app.Use(middleware.LoggingMiddleware)
+app.Use(middleware.TimeoutMiddleware(2 * time.Second))
 ```
 
 # Contribute

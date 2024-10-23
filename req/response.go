@@ -1,5 +1,3 @@
-// File: req/response.go
-
 package req
 
 import (
