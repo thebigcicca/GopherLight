@@ -1,6 +1,6 @@
 # GopherLight ![gopher1](./img/typing-furiously.gif)
 
-![GitHub License](https://img.shields.io/github/license/BrunoCiccarino/express-go?style=for-the-badge&color=blue&link=https%3A%2F%2Fgithub.com%2FBrunoCiccarino%2Fexpress-go%2Fblob%2Fmain%2FLICENSE) ![Go Reference](https://img.shields.io/badge/reference-grey?style=for-the-badge&logo=go&link=https%3A%2F%2Fgithub.com%2FBrunoCiccarino%2Fexpress-go) ![pr's welcome](https://img.shields.io/badge/PR'S-WELCOME-green?style=for-the-badge) ![GitHub Repo stars](https://img.shields.io/github/stars/BrunoCiccarino/express-go) ![GitHub followers](https://img.shields.io/github/followers/BrunoCiccarino?link=https%3A%2F%2Fgithub.com%2FBrunoCiccarino) ![GitHub forks](https://img.shields.io/github/forks/BrunoCiccarino/express-go)
+![GitHub License](https://img.shields.io/github/license/BrunoCiccarino/express-go?style=for-the-badge&color=blue&link=https%3A%2F%2Fgithub.com%2FBrunoCiccarino%2Fexpress-go%2Fblob%2Fmain%2FLICENSE) ![Go Reference](https://img.shields.io/badge/reference-grey?style=for-the-badge&logo=go&link=https%3A%2F%2Fgithub.com%2FBrunoCiccarino%2Fexpress-go) ![pr's welcome](https://img.shields.io/badge/PR'S-WELCOME-green?style=for-the-badge) [![discord](https://img.shields.io/badge/discord-grey?style=for-the-badge&logo=discord)](https://discord.gg/53S7GXW6) ![GitHub Repo stars](https://img.shields.io/github/stars/BrunoCiccarino/express-go) ![GitHub followers](https://img.shields.io/github/followers/BrunoCiccarino?link=https%3A%2F%2Fgithub.com%2FBrunoCiccarino) ![GitHub forks](https://img.shields.io/github/forks/BrunoCiccarino/express-go)
 
 
 ![gopher2](./img/gopher.png)
@@ -71,7 +71,7 @@ app.Use(middleware.LoggingMiddleware)
 app.Use(middleware.TimeoutMiddleware(2 * time.Second))
 ```
 
-# Contribute
+### Contribute
 
 That said, there's a bunch of ways you can contribute to this project, like by:
 
@@ -83,7 +83,7 @@ That said, there's a bunch of ways you can contribute to this project, like by:
 * ⚠️ Before making a pull request, it is important that you read our [doc](./docs/CONTRIBUTE.md)
 
 
-## Contributors
+### Contributors
 
 This project exists thanks to all the people who contribute. 
 
