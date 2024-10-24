@@ -55,7 +55,7 @@ func main() {
 	app := router.NewApp()
 
 	// Define a route that responds to a GET request at "/hello".
-	app.Route("GET", "/hello", func(r *req.Request, w *req.Response) {
+	app.Get("/hello", func(r *req.Request, w *req.Response) {
 		w.Send("Hello, World!")
 	})
 
@@ -70,6 +70,38 @@ func main() {
 app.Use(middleware.LoggingMiddleware)
 app.Use(middleware.TimeoutMiddleware(2 * time.Second))
 ```
+
+### Basic plugin example
+
+```go
+package main
+
+import (
+	"github.com/BrunoCiccarino/GopherLight/plugins"
+	"github.com/BrunoCiccarino/GopherLight/req"
+	"github.com/BrunoCiccarino/GopherLight/router"
+)
+
+type MyPlugin struct{}
+
+func (p *MyPlugin) Register(route func(method string, path string, handler func(req *req.Request, res *req.Response))) {
+	route("GET", "/hello", func(req *req.Request, res *req.Response) {
+		res.Send("Hello from MyPlugin!")
+	})
+}
+
+func main() {
+	app := router.NewApp()
+	// Creating a plugin instance
+	myPlugin := &myplugin.MyPlugin{}
+	// Add the plugin to the application
+	app.AddPlugin(myPlugin)
+	// Register plugins
+	app.RegisterPlugins()
+
+}
+```
+
 
 ### Contribute
 
