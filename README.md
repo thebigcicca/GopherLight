@@ -27,9 +27,9 @@ So, if you’re looking for a friendly and efficient way to build web apps in Go
 - [x] http requests 100%
 - [x] manipulation of the methods (get, post, put, delete ...) 100%
 - [x] plugin support 100%
-- [ ] middleware (authentication, ~~timeout~~, anti csrf, ~~logging~~, etc...) 5%
+- [x] more detailed error logs 100%
+- [ ] middleware (authentication, ~~timeout~~, anti csrf, ~~logging~~, etc...) 50%
 - [ ] next func 0 %
-- [ ] more detailed error logs 0%
 - [ ] More complete documentation 0%
 
 ### Installation
