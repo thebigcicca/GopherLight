@@ -3,6 +3,7 @@ package router
 import (
 	"net/http"
 
+	"github.com/BrunoCiccarino/GopherLight/logger"
 	"github.com/BrunoCiccarino/GopherLight/plugins"
 	"github.com/BrunoCiccarino/GopherLight/req"
 )
@@ -94,9 +95,11 @@ func (a *App) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		if handler, methodExists := handlers[r.Method]; methodExists {
 			handler(w, r)
 		} else {
+			logger.LogWarning("Method not allowed: " + r.Method + " on path: " + r.URL.Path)
 			http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)
 		}
 	} else {
+		logger.LogError("Route not found: " + r.URL.Path)
 		http.NotFound(w, r)
 	}
 }

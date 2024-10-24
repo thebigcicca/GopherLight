@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/BrunoCiccarino/GopherLight/logger"
 	"github.com/BrunoCiccarino/GopherLight/router"
 )
 
@@ -24,7 +25,11 @@ func TimeoutMiddleware(timeout time.Duration) router.Middleware {
 
 			select {
 			case <-done:
+
+				logger.LogInfo("Request completed within timeout")
 			case <-ctx.Done():
+
+				logger.LogError("Request timed out for " + r.URL.Path)
 				http.Error(w, "Request Timeout", http.StatusGatewayTimeout)
 			}
 		}

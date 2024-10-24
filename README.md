@@ -1,6 +1,6 @@
 # GopherLight ![gopher1](./img/typing-furiously.gif)
 
-![GitHub License](https://img.shields.io/github/license/BrunoCiccarino/express-go?style=for-the-badge&color=blue&link=https%3A%2F%2Fgithub.com%2FBrunoCiccarino%2Fexpress-go%2Fblob%2Fmain%2FLICENSE) ![Go Reference](https://img.shields.io/badge/reference-grey?style=for-the-badge&logo=go&link=https%3A%2F%2Fgithub.com%2FBrunoCiccarino%2Fexpress-go) ![pr's welcome](https://img.shields.io/badge/PR'S-WELCOME-green?style=for-the-badge) [![discord](https://img.shields.io/badge/discord-grey?style=for-the-badge&logo=discord)](https://discord.gg/53S7GXW6) ![GitHub Repo stars](https://img.shields.io/github/stars/BrunoCiccarino/express-go) [![GitHub followers](https://img.shields.io/github/followers/BrunoCiccarino?link=https%3A%2F%2Fgithub.com%2FBrunoCiccarino)](https://github.com/BrunoCiccarino) ![GitHub forks](https://img.shields.io/github/forks/BrunoCiccarino/express-go)
+[![GitHub License](https://img.shields.io/github/license/BrunoCiccarino/express-go?style=for-the-badge&color=blue&link=https%3A%2F%2Fgithub.com%2FBrunoCiccarino%2Fexpress-go%2Fblob%2Fmain%2FLICENSE)](https://github.com/BrunoCiccarino/GopherLight/blob/main/LICENSE) ![Go Reference](https://img.shields.io/badge/reference-grey?style=for-the-badge&logo=go&link=https%3A%2F%2Fgithub.com%2FBrunoCiccarino%2Fexpress-go) ![pr's welcome](https://img.shields.io/badge/PR'S-WELCOME-green?style=for-the-badge) [![discord](https://img.shields.io/badge/discord-grey?style=for-the-badge&logo=discord)](https://discord.gg/53S7GXW6) ![GitHub Repo stars](https://img.shields.io/github/stars/BrunoCiccarino/express-go) [![GitHub followers](https://img.shields.io/github/followers/BrunoCiccarino?link=https%3A%2F%2Fgithub.com%2FBrunoCiccarino)](https://github.com/BrunoCiccarino) ![GitHub forks](https://img.shields.io/github/forks/BrunoCiccarino/express-go)
 
 
 ![gopher2](./img/GopherLight.png)
@@ -23,13 +23,14 @@ So, if you’re looking for a friendly and efficient way to build web apps in Go
 
 ### Tasks
 
-- [x] router
-- [x] http requests
-- [x] manipulation of the methods (get, post, pu, delete ...)
-- [ ] middleware (authentication, ~~timeout~~, anti csrf, ~~logging~~, etc...)
-- [ ] next func
-- [ ] more detailed error logs
-- [ ] More complete documentation
+- [x] router 100%
+- [x] http requests 100%
+- [x] manipulation of the methods (get, post, put, delete ...) 100%
+- [x] plugin support 100%
+- [ ] middleware (authentication, ~~timeout~~, anti csrf, ~~logging~~, etc...) 5%
+- [ ] next func 0 %
+- [ ] more detailed error logs 0%
+- [ ] More complete documentation 0%
 
 ### Installation
 
@@ -37,6 +38,7 @@ So, if you’re looking for a friendly and efficient way to build web apps in Go
 go get github.com/BrunoCiccarino/GopherLight/router
 go get github.com/BrunoCiccarino/GopherLight/req
 go get github.com/BrunoCiccarino/GopherLight/middleware
+go get github.com/BrunoCiccarino/GopherLight/plugins
 ```
 
 ### basic usage example
@@ -101,7 +103,6 @@ func main() {
 
 }
 ```
-
 
 ### Contribute
 

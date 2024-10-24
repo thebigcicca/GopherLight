@@ -3,6 +3,8 @@ package req
 import (
 	"encoding/json"
 	"net/http"
+
+	"github.com/BrunoCiccarino/GopherLight/logger"
 )
 
 type Response struct {
@@ -28,6 +30,7 @@ func (res *Response) JSON(data interface{}) {
 	res.Header().Set("Content-Type", "application/json")
 	jsonData, err := json.Marshal(data)
 	if err != nil {
+		logger.LogError("Error encoding JSON response: " + err.Error())
 		res.Status(http.StatusInternalServerError).JSONError("Error encoding JSON")
 		return
 	}

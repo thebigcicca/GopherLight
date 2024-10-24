@@ -3,6 +3,8 @@ package req
 import (
 	"io"
 	"net/http"
+
+	"github.com/BrunoCiccarino/GopherLight/logger"
 )
 
 type Request struct {
@@ -11,8 +13,13 @@ type Request struct {
 }
 
 func NewRequest(req *http.Request) *Request {
-	bodyBytes, _ := io.ReadAll(req.Body)
+	bodyBytes, err := io.ReadAll(req.Body)
+	if err != nil {
+		logger.LogError("Error reading request body: " + err.Error())
+		return &Request{Req: req, Body: ""}
+	}
 	bodyString := string(bodyBytes)
+	logger.LogInfo("Received request body: " + bodyString)
 
 	return &Request{
 		Req:  req,
