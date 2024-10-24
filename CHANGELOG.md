@@ -8,7 +8,7 @@ We are excited to announce the first version of express-go, a micro-framework in
 * Simple Routing: Set up routes quickly and easily. Just define the URL and a handler, and that's it!
 
 ```go
-app.Route("GET", "/hello", func(r *req.Request, w *req.Response) {
+app.Route("/hello", func(r *req.Request, w *req.Response) {
     w.Send("Hello, World!")
 })
 ```
@@ -61,14 +61,14 @@ app.Use(middleware.TimeoutMiddleware(2 * time.Second))
 
 ### 🛠️ Improvements
 
-HTTP Method Validation: We've implemented stricter validation for HTTP methods. Now, your routes will only respond to the defined methods, ensuring security and better management of requests.
+* HTTP Method Validation: We've implemented stricter validation for HTTP methods. Now, your routes will only respond to the defined methods, ensuring security and better management of requests.
 ### 🔄 Changes
 
-Route Function Refactoring: The route function has been restructured to handle multiple HTTP methods efficiently, improving performance and code clarity.
-Documentation Update: The documentation has been updated to reflect all the new features, including detailed examples of how to utilize multiple HTTP methods and middleware in your application.
+* Route Function Refactoring: The route function has been restructured to handle multiple HTTP methods efficiently, improving performance and code clarity.
+* Documentation Update: The documentation has been updated to reflect all the new features, including detailed examples of how to utilize multiple HTTP methods and middleware in your application.
 ### 🚀 What’s Next?
 
-Enhanced error handling and better integration with third-party services.
+* Enhanced error handling and better integration with third-party services.
 Middleware for authentication and CSRF protection.
 
 * 📝 Contributions GopherLight continues to grow with your support! We welcome contributions, suggestions, and improvements from the community. Feel free to explore, submit issues, or open PRs to make the framework even better.
