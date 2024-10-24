@@ -15,7 +15,7 @@ func main() {
 	app := router.NewApp()
 
 	// Define a route that responds to a GET request at "/hello".
-	app.Route("GET", "/hello", func(r *req.Request, w *req.Response) {
+	app.Get("/hello", func(r *req.Request, w *req.Response) {
 		w.Send("Hello, World!")
 	})
 

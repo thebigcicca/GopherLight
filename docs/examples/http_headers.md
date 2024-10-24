@@ -16,7 +16,7 @@ func main() {
 	app := router.NewApp()
 
 	// Define a route that responds to a GET request at "/auth".
-	app.Route("GET", "/auth", func(r *req.Request, w *req.Response) {
+	app.Get("/auth", func(r *req.Request, w *req.Response) {
 		authHeader := r.Header("Authorization")
 		if authHeader == "" {
 			w.Status(401).Send("Unauthorized")
