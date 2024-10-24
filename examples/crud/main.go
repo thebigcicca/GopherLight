@@ -149,11 +149,11 @@ func main() {
 	app.Use(loggingMiddleware)
 
 	// Register routes
-	app.Route("GET", "/hello", HelloHandler)
-	app.Route("POST", "/users/create", CreateUser)
-	app.Route("GET", "/users/get", GetUser)
-	app.Route("PUT", "/users/update", UpdateUser)
-	app.Route("DELETE", "/users/delete", DeleteUser)
+	app.Get("/hello", HelloHandler)
+	app.Post("/users/create", CreateUser)
+	app.Get("/users/get", GetUser)
+	app.Put("/users/update", UpdateUser)
+	app.Delete("/users/delete", DeleteUser)
 
 	fmt.Println("Server listening on port 3333")
 	app.Listen(":3333")
