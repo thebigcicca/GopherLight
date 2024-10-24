@@ -56,6 +56,39 @@ func (a *App) Route(method string, path string, handler func(req *req.Request, r
 	a.routes[path][method] = h
 }
 
+func (a *App) Get(path string, handler func(req *req.Request, res *req.Response)) {
+	a.Route(http.MethodGet, path, handler)
+}
+
+func (a *App) Post(path string, handler func(req *req.Request, res *req.Response)) {
+	a.Route(http.MethodPost, path, handler)
+}
+
+func (a *App) Put(path string, handler func(req *req.Request, res *req.Response)) {
+	a.Route(http.MethodPut, path, handler)
+}
+
+func (a *App) Delete(path string, handler func(req *req.Request, res *req.Response)) {
+	a.Route(http.MethodDelete, path, handler)
+}
+
+func (a *App) Patch(path string, handler func(req *req.Request, res *req.Response)) {
+	a.Route(http.MethodPatch, path, handler)
+}
+func (a *App) Options(path string, handler func(req *req.Request, res *req.Response)) {
+	a.Route(http.MethodOptions, path, handler)
+}
+func (a *App) Head(path string, handler func(req *req.Request, res *req.Response)) {
+	a.Route(http.MethodHead, path, handler)
+}
+
+func (a *App) Connect(path string, handler func(req *req.Request, res *req.Response)) {
+	a.Route(http.MethodConnect, path, handler)
+}
+func (a *App) Trace(path string, handler func(req *req.Request, res *req.Response)) {
+	a.Route(http.MethodTrace, path, handler)
+}
+
 func (a *App) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if handlers, exists := a.routes[r.URL.Path]; exists {
 		if handler, methodExists := handlers[r.Method]; methodExists {
