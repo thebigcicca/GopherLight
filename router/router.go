@@ -1,19 +1,18 @@
-// File: router/router.go
-
 package router
 
 import (
 	"net/http"
 
+	"github.com/BrunoCiccarino/GopherLight/plugins"
 	"github.com/BrunoCiccarino/GopherLight/req"
 )
 
-// Middleware type definition
 type Middleware func(http.HandlerFunc) http.HandlerFunc
 
 type App struct {
 	routes      map[string]map[string]http.HandlerFunc
 	middlewares []Middleware
+	plugins     []plugins.Plugin
 }
 
 func NewApp() *App {
@@ -25,6 +24,16 @@ func NewApp() *App {
 // Use method to add middleware to the App
 func (a *App) Use(mw Middleware) {
 	a.middlewares = append(a.middlewares, mw)
+}
+
+func (a *App) AddPlugin(p plugins.Plugin) {
+	a.plugins = append(a.plugins, p)
+}
+
+func (a *App) RegisterPlugins() {
+	for _, plugin := range a.plugins {
+		plugin.Register(a.Route)
+	}
 }
 
 func (a *App) Route(method string, path string, handler func(req *req.Request, res *req.Response)) {
