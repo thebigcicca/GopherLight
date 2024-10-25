@@ -33,7 +33,7 @@ So, if you’re looking for a friendly and efficient way to build web apps in Go
 - [x] manipulation of the methods (get, post, put, delete ...) 100%
 - [x] plugin support 100%
 - [x] more detailed error logs 100%
-- [ ] middleware (authentication, ~~timeout~~, anti csrf, ~~logging~~, etc...) 50%
+- [ ] middleware (~~authentication~~, ~~timeout~~, anti csrf, ~~logging~~, etc...) 75%
 - [ ] next func 0 %
 - [ ] More complete documentation 0%
 
@@ -76,6 +76,7 @@ func main() {
 ```go
 app.Use(middleware.LoggingMiddleware)
 app.Use(middleware.TimeoutMiddleware(2 * time.Second))
+app.Use(middleware.NewAuthMiddleware)
 ```
 
 ### Basic plugin example
