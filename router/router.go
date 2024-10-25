@@ -1,7 +1,14 @@
 package router
 
 import (
+	"context"
+	"fmt"
+	"log"
 	"net/http"
+	"os"
+	"os/signal"
+	"syscall"
+	"time"
 
 	"github.com/BrunoCiccarino/GopherLight/logger"
 	"github.com/BrunoCiccarino/GopherLight/plugins"
@@ -105,5 +112,35 @@ func (a *App) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 }
 
 func (a *App) Listen(addr string) error {
-	return http.ListenAndServe(addr, a)
+	stop := make(chan os.Signal, 1)
+	signal.Notify(stop, os.Interrupt, syscall.SIGTERM)
+	defer signal.Stop(stop)
+
+	srv := &http.Server{
+		Addr:    addr,
+		Handler: a,
+	}
+	// Start the server in a goroutine
+	serverError := make(chan error, 1)
+	go func() {
+		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			serverError <- err
+		}
+	}()
+
+	// Wait for interrupt signal or server error
+	select {
+	case <-stop:
+		log.Println("Shutting down server...")
+		ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+		defer cancel()
+
+		if err := srv.Shutdown(ctx); err != nil {
+			return fmt.Errorf("server shutdown failed: %v", err)
+		}
+		log.Println("Server gracefully stopped.")
+		return nil
+	case err := <-serverError:
+		return fmt.Errorf("server error: %v", err)
+	}
 }
