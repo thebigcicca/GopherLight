@@ -33,7 +33,7 @@ So, if you’re looking for a friendly and efficient way to build web apps in Go
 - [x] manipulation of the methods (get, post, put, delete ...) 100%
 - [x] plugin support 100%
 - [x] more detailed error logs 100%
-- [ ] middleware (~~authentication~~, ~~timeout~~, anti csrf, ~~logging~~, etc...) 75%
+- [x] basical middlewares (~~authentication~~, ~~timeout~~, ~~csrf~~, ~~logging~~, etc...) 100%
 - [ ] next func 0 %
 - [ ] More complete documentation 0%
 
@@ -72,6 +72,37 @@ func main() {
 ```
 
 ### basic use middlewares
+csrf middleware
+
+```go
+func isValidToken(token string) bool {
+	return token == "fixed-valid-csrf-token"
+}
+
+func main () {
+	csrfToken := middleware.GenerateCSRFToken()
+	middleware.SetValidCSRFToken(csrfToken)
+
+	app.Use(func(handler func(*req.Request, *req.Response)) func(*req.Request, *req.Response) {
+		return func(r *req.Request, res *req.Response) {
+			token := r.Header("X-CSRF-Token")
+			if token != csrfToken {
+				res.SetStatus(403)
+				res.Write([]byte("Invalid CSRF token"))
+				return
+			}
+			
+			handler(r, res)
+		}
+	})
+
+	app.Get("/example", func(r *req.Request, res *req.Response) {
+		res.SetHeader("Content-Type", "text/plain")
+		res.Write([]byte("Hello from /example route with CSRF protection"))
+	})
+
+}
+```
 
 ```go
 app.Use(middleware.LoggingMiddleware)
@@ -79,7 +110,7 @@ app.Use(middleware.TimeoutMiddleware(2 * time.Second))
 app.Use(middleware.NewAuthMiddleware)
 ```
 
-### Basic plugin example
+### basic plugin example
 
 ```go
 package main
