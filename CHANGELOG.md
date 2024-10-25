@@ -1,39 +1,39 @@
 ## Changelog
 
-### GopherLight v0.1 Release Notes
-🚀 GopherLight v0.1 - The First Release!
-We are excited to announce the first version of express-go, a micro-framework inspired by Express.js, now for the Go universe! This initial release brings the simplicity and flexibility you already love from Express, but with the robust performance and reliability of Go.
+### GopherLight v0.3 Relase Notes
+🚀 GopherLight v0.3 - Improved routes and added plugin support.
 
-🎯 Main Features
-* Simple Routing: Set up routes quickly and easily. Just define the URL and a handler, and that's it!
+We are excited to announce the second version of GopherLight, bringing more flexibility and features to our lightweight Go framework. With this update, you’ll experience a more powerful routing system and the addition of convenient plugin support to streamline your development process.
+
+### 🎯 Additions
+
+* support for plugins that can personalize your experience developing using GopherLight
+* support more detailed error logs
 
 ```go
-app.Route("/hello", func(r *req.Request, w *req.Response) {
-    w.Send("Hello, World!")
-})
+type MyPlugin struct{}
+
+func (p *MyPlugin) Register(route func(method string, path string, handler func(req *req.Request, res *req.Response))) {
+	route("GET", "/hello", func(req *req.Request, res *req.Response) {
+		res.Send("Hello from MyPlugin!")
+	})
+}
 ```
 
-* Easy Request Handling: The framework encapsulates HTTP request details to facilitate access to query parameters, headers and request body.
+### 🛠️ Improvements
+
+* Improvement in routes, with support for standard http methods such as get, put, post, delete.
+
 ```go
-name := r.QueryParam("name")
-token := r.Header("Authorization")
+app.Get("/hello", func(r *req.Request, w *req.Response) {
+		w.Send("Hello, World!")
+	})
 ```
 
-* Flexible Responses: Send responses in plain text or JSON, all with convenient methods.
-```go 
-w.Send("Hello, Go!")
-w.JSON(map[string]string{"message": "Hello, JSON"})
-```
-
-🛠️ What's Coming
-This is only version 0.1, so there's still a lot to go! We are working on:
-
-* Middleware for handling authentication and validations.
-* Support dynamic routes and route parameters.
-* Improvements in error management and customized responses.
-
-📝 Contributions
-This is an early version, and we are open to suggestions, improvements and contributions from the community. Feel free to explore the code, open issues, or submit PRs to make express-go even better!
+### 🚀 What’s Next?
+* middleware (authentication, ~~timeout~~, anti csrf, ~~logging~~, etc...)
+* next func
+* More complete documentation
 
 ### GopherLight v0.2 Release Notes
 🚀 GopherLight v0.2 - Enhanced Routing and Middleware Support!
@@ -72,3 +72,38 @@ app.Use(middleware.TimeoutMiddleware(2 * time.Second))
 Middleware for authentication and CSRF protection.
 
 * 📝 Contributions GopherLight continues to grow with your support! We welcome contributions, suggestions, and improvements from the community. Feel free to explore, submit issues, or open PRs to make the framework even better.
+
+### GopherLight v0.1 Release Notes
+🚀 GopherLight v0.1 - The First Release!
+We are excited to announce the first version of express-go, a micro-framework inspired by Express.js, now for the Go universe! This initial release brings the simplicity and flexibility you already love from Express, but with the robust performance and reliability of Go.
+
+🎯 Main Features
+* Simple Routing: Set up routes quickly and easily. Just define the URL and a handler, and that's it!
+
+```go
+app.Route("/hello", func(r *req.Request, w *req.Response) {
+    w.Send("Hello, World!")
+})
+```
+
+* Easy Request Handling: The framework encapsulates HTTP request details to facilitate access to query parameters, headers and request body.
+```go
+name := r.QueryParam("name")
+token := r.Header("Authorization")
+```
+
+* Flexible Responses: Send responses in plain text or JSON, all with convenient methods.
+```go 
+w.Send("Hello, Go!")
+w.JSON(map[string]string{"message": "Hello, JSON"})
+```
+
+🛠️ What's Coming
+This is only version 0.1, so there's still a lot to go! We are working on:
+
+* Middleware for handling authentication and validations.
+* Support dynamic routes and route parameters.
+* Improvements in error management and customized responses.
+
+📝 Contributions
+This is an early version, and we are open to suggestions, improvements and contributions from the community. Feel free to explore the code, open issues, or submit PRs to make express-go even better!

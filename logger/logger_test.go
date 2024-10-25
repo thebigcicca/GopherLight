@@ -2,6 +2,7 @@ package logger
 
 import (
 	"bytes"
+	"errors"
 	"log"
 	"testing"
 )
@@ -10,39 +11,39 @@ func captureOutput(f func()) string {
 	var buf bytes.Buffer
 	log.SetOutput(&buf)
 	log.SetFlags(0)
-	f() // Leave it here because otherwise the logger will try to write to a null pointer, resulting in an "invalid memory address or nil pointer dereference" error.
+	f()
 	log.SetOutput(nil)
 	return buf.String()
 }
 
-func TestLogInfo(t *testing.T) {
+func TestLogCriticalError(t *testing.T) {
 	output := captureOutput(func() {
-		LogInfo("Testing info message")
+		LogCriticalError("Critical error occurred")
 	})
 
-	expected := "[INFO] Testing info message\n"
+	expected := "[CRITICAL] Critical error occurred\n"
 	if output != expected {
 		t.Errorf("Expected '%s' but got '%s'", expected, output)
 	}
 }
 
-func TestLogWarning(t *testing.T) {
+func TestCheckCriticalError(t *testing.T) {
 	output := captureOutput(func() {
-		LogWarning("Testing warning message")
+		CheckCriticalError(errors.New("Critical connection error"), "Database connection")
 	})
 
-	expected := "[WARNING] Testing warning message\n"
+	expected := "[CRITICAL] Database connection: Critical connection error\n"
 	if output != expected {
 		t.Errorf("Expected '%s' but got '%s'", expected, output)
 	}
 }
 
-func TestLogError(t *testing.T) {
+func TestLogDebug(t *testing.T) {
 	output := captureOutput(func() {
-		LogError("Testing error message")
+		LogDebug("Debugging application")
 	})
 
-	expected := "[ERROR] Testing error message\n"
+	expected := "[DEBUG] Debugging application\n"
 	if output != expected {
 		t.Errorf("Expected '%s' but got '%s'", expected, output)
 	}
