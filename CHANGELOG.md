@@ -9,6 +9,7 @@ We are excited to announce the second version of GopherLight, bringing more flex
 
 * support for plugins that can personalize your experience developing using GopherLight
 * support more detailed error logs
+* Middlewares for authentication and CSRF protection.
 
 ```go
 type MyPlugin struct{}
@@ -17,6 +18,32 @@ func (p *MyPlugin) Register(route func(method string, path string, handler func(
 	route("GET", "/hello", func(req *req.Request, res *req.Response) {
 		res.Send("Hello from MyPlugin!")
 	})
+}
+```
+
+```go
+func main () {
+	csrfToken := middleware.GenerateCSRFToken()
+	middleware.SetValidCSRFToken(csrfToken)
+
+	app.Use(func(handler func(*req.Request, *req.Response)) func(*req.Request, *req.Response) {
+		return func(r *req.Request, res *req.Response) {
+			token := r.Header("X-CSRF-Token")
+			if token != csrfToken {
+				res.SetStatus(403)
+				res.Write([]byte("Invalid CSRF token"))
+				return
+			}
+			
+			handler(r, res)
+		}
+	})
+
+	app.Get("/example", func(r *req.Request, res *req.Response) {
+		res.SetHeader("Content-Type", "text/plain")
+		res.Write([]byte("Hello from /example route with CSRF protection"))
+	})
+
 }
 ```
 
@@ -31,8 +58,8 @@ app.Get("/hello", func(r *req.Request, w *req.Response) {
 ```
 
 ### 🚀 What’s Next?
-* middleware (authentication, ~~timeout~~, anti csrf, ~~logging~~, etc...)
 * next func
+* proxy support
 * More complete documentation
 
 ### GopherLight v0.2 Release Notes
@@ -69,7 +96,7 @@ app.Use(middleware.TimeoutMiddleware(2 * time.Second))
 ### 🚀 What’s Next?
 
 * Enhanced error handling and better integration with third-party services.
-Middleware for authentication and CSRF protection.
+* Middleware for authentication and CSRF protection.
 
 * 📝 Contributions GopherLight continues to grow with your support! We welcome contributions, suggestions, and improvements from the community. Feel free to explore, submit issues, or open PRs to make the framework even better.
 

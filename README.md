@@ -75,10 +75,6 @@ func main() {
 csrf middleware
 
 ```go
-func isValidToken(token string) bool {
-	return token == "fixed-valid-csrf-token"
-}
-
 func main () {
 	csrfToken := middleware.GenerateCSRFToken()
 	middleware.SetValidCSRFToken(csrfToken)
