@@ -18,13 +18,14 @@ func TestCORSMiddlewareDefaultOptions(t *testing.T) {
 
 	handler.ServeHTTP(recorder, request)
 
-	assert.Equal(t, recorder.Result().StatusCode, http.StatusOK)
-	assert.Equal(t, recorder.Header().Get("Access-Control-Allow-Origin"), "*")
-	assert.Equal(t, recorder.Header().Get("Access-Control-Allow-Credentials"), "true")
-	assert.Equal(t, recorder.Header().Get("Access-Control-Allow-Headers"), "Content-Type,Authorization")
-	assert.Equal(t, recorder.Header().Get("Access-Control-Expose-Headers"), "")
-	assert.Equal(t, recorder.Header().Get("Access-Control-Max-Age"), "600")
-	assert.Equal(t, recorder.Header().Get("Access-Control-Allow-Methods"), "GET,HEAD,DELETE,OPTIONS,PATCH,POST")
+	assert.Equal(t, http.StatusOK, recorder.Result().StatusCode)
+	assert.Equal(t, "*", recorder.Header().Get("Access-Control-Allow-Origin"))
+	assert.Equal(t, "true", recorder.Header().Get("Access-Control-Allow-Credentials"))
+	assert.Equal(t, "Content-Type,Authorization", recorder.Header().Get("Access-Control-Allow-Headers"))
+	assert.Equal(t, "", recorder.Header().Get("Access-Control-Expose-Headers"))
+	assert.Equal(t, "600", recorder.Header().Get("Access-Control-Max-Age"))
+	assert.Equal(t, "GET,HEAD,DELETE,OPTIONS,PATCH,POST", recorder.Header().Get("Access-Control-Allow-Methods"))
+
 }
 
 func TestCORSMiddlewareOriginNotAllowed(t *testing.T) {
@@ -37,5 +38,5 @@ func TestCORSMiddlewareOriginNotAllowed(t *testing.T) {
 	}))
 
 	handler.ServeHTTP(recorder, request)
-	assert.Equal(t, recorder.Result().StatusCode, http.StatusForbidden)
+	assert.Equal(t, http.StatusForbidden, recorder.Result().StatusCode)
 }
