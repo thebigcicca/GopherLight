@@ -11,6 +11,8 @@ Please mark the options that best describe your PR:
 - [ ] Enhancement
 - [ ] Refactor
 - [ ] Documentation update
+- [ ] CI/CD changes
+- [ ] Dependencies update
 - [ ] Other (please specify):
 
 ## Checklist
