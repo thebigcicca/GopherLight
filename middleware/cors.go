@@ -41,7 +41,7 @@ var DefaultCORSOptions = CORSOptions{
 	AllowHeaders:     []string{"Content-Type", "Authorization"},
 	ExposeHeaders:    []string{},
 	AllowMethods:     []string{http.MethodGet, http.MethodHead, http.MethodDelete, http.MethodOptions, http.MethodPatch, http.MethodPost},
-	AllowCredentials: true,
+	AllowCredentials: false,
 	MaxAge:           600,
 }
 
@@ -56,6 +56,11 @@ func CORSMiddleware(opts CORSOptions) func(http.HandlerFunc) http.HandlerFunc {
 				return
 			}
 
+			if opts.AllowOrigin == "*" && opts.AllowCredentials {
+				http.Error(w, "Could not set Access-Control-Allow-Credentials to true when Access-Control-Allow-Origin is *", http.StatusForbidden)
+				return
+			}
+
 			if opts.AllowOrigin != "" {
 				w.Header().Add("Access-Control-Allow-Origin", opts.AllowOrigin)
 			}
@@ -65,6 +70,7 @@ func CORSMiddleware(opts CORSOptions) func(http.HandlerFunc) http.HandlerFunc {
 			if opts.AllowCredentials {
 				w.Header().Add("Access-Control-Allow-Credentials", "true")
 			}
+
 			if len(opts.AllowHeaders) != 0 {
 				w.Header().Add("Access-Control-Allow-Headers", strings.Join(opts.AllowHeaders, ","))
 			}

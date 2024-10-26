@@ -20,7 +20,7 @@ func TestCORSMiddlewareDefaultOptions(t *testing.T) {
 
 	assert.Equal(t, http.StatusOK, recorder.Result().StatusCode)
 	assert.Equal(t, "*", recorder.Header().Get("Access-Control-Allow-Origin"))
-	assert.Equal(t, "true", recorder.Header().Get("Access-Control-Allow-Credentials"))
+	assert.Equal(t, "", recorder.Header().Get("Access-Control-Allow-Credentials"))
 	assert.Equal(t, "Content-Type,Authorization", recorder.Header().Get("Access-Control-Allow-Headers"))
 	assert.Equal(t, "", recorder.Header().Get("Access-Control-Expose-Headers"))
 	assert.Equal(t, "600", recorder.Header().Get("Access-Control-Max-Age"))
