@@ -146,7 +146,7 @@ That said, there's a bunch of ways you can contribute to this project, like by:
 * 📄 Improving this [documentation](./docs/)
 * 🚨 Sharing this project and recommending it to your friends
 * 💻 Submitting a pull request to the official repository
-* ⚠️ Before making a pull request, it is important that you read our [doc](./docs/CONTRIBUTE.md)
+* ⚠️ Before making a pull request, it is important that you read our [doc](.github/CONTRIBUTING)
 
 
 ### Contributors
