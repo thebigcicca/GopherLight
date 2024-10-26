@@ -1,0 +1,35 @@
+# Exclude the Dockerfile and .dockerignore itself (optional)
+Dockerfile
+.dockerignore
+
+# Exclude version control directories
+.git
+.gitignore
+
+# Exclude Go build artifacts
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+*.a
+*.o
+*.log
+*.tmp
+*.old
+
+# Exclude directories
+node_modules
+vendor
+tmp
+logs
+bin
+
+# Exclude other examples
+../*
+
+# Include necessary directories
+!../../router/**
+!../../req/**
