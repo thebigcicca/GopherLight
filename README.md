@@ -33,7 +33,7 @@ So, if you’re looking for a friendly and efficient way to build web apps in Go
 - [x] manipulation of the methods (get, post, put, delete ...) 100%
 - [x] plugin support 100%
 - [x] more detailed error logs 100%
-- [x] basical middlewares (~~authentication~~, ~~timeout~~, ~~csrf~~, ~~logging~~, etc...) 100%
+- [x] basical middlewares (~~authentication~~, ~~timeout~~, ~~CORS~~, ~~csrf~~, ~~logging~~, etc...) 100%
 - [ ] next func 0 %
 - [ ] More complete documentation 0%
 
