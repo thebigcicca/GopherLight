@@ -26,16 +26,21 @@ So, if you’re looking for a friendly and efficient way to build web apps in Go
 > [!WARNING]
 > We are in an initial beta version, so it is likely that the framework will change a lot, always stay up to date, with an updated version of your code using the framework.
 
-### Tasks
+### Features 
+- [x] router 
+- [x] http requests 
+- [x] manipulation of the methods (get, post, put, delete ...) 
+- [x] plugin support 
+- [x] more detailed error logs 
+- [x] basical middlewares (~~authentication~~, ~~timeout~~, ~~CORS~~, ~~csrf~~, ~~logging~~, etc...)
 
-- [x] router 100%
-- [x] http requests 100%
-- [x] manipulation of the methods (get, post, put, delete ...) 100%
-- [x] plugin support 100%
-- [x] more detailed error logs 100%
-- [x] basical middlewares (~~authentication~~, ~~timeout~~, ~~CORS~~, ~~csrf~~, ~~logging~~, etc...) 100%
+### Tasks
 - [x] More complete documentation 100%
-- [ ] next func 0 %
+- [ ] next func 0%
+- [ ] orm support 0%
+- [ ] proxy support 0%
+- [ ] advanced middlewares (cookies, limiter, skip, etc ...) 0%
+- [ ] architecture change to hexagonal architecture 0%
 
 ### Installation
 
