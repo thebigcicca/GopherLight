@@ -89,3 +89,5 @@ app.Use(middleware.TimeoutMiddleware(timeout))
 
 Putting It All Together
 Alright, now that you’re equipped with JWT auth, CORS controls, CSRF protection, request logging, and request timeouts, you’re ready to make your app secure, flexible, and robust! Mix and match these middlewares as needed, and build a resilient API like a pro. Go forth and code!
+
+Want to learn how to make amazing plugins to extend the functionality of our framework? Follow the link: [link](./plugins.md)

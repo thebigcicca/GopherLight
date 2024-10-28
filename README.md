@@ -34,8 +34,8 @@ So, if you’re looking for a friendly and efficient way to build web apps in Go
 - [x] plugin support 100%
 - [x] more detailed error logs 100%
 - [x] basical middlewares (~~authentication~~, ~~timeout~~, ~~CORS~~, ~~csrf~~, ~~logging~~, etc...) 100%
+- [x] More complete documentation 100%
 - [ ] next func 0 %
-- [ ] More complete documentation 0%
 
 ### Installation
 
@@ -71,71 +71,7 @@ func main() {
 }
 ```
 
-### basic use middlewares
-csrf middleware
-
-```go
-func main () {
-	csrfToken := middleware.GenerateCSRFToken()
-	middleware.SetValidCSRFToken(csrfToken)
-
-	app.Use(func(handler func(*req.Request, *req.Response)) func(*req.Request, *req.Response) {
-		return func(r *req.Request, res *req.Response) {
-			token := r.Header("X-CSRF-Token")
-			if token != csrfToken {
-				res.SetStatus(403)
-				res.Write([]byte("Invalid CSRF token"))
-				return
-			}
-			
-			handler(r, res)
-		}
-	})
-
-	app.Get("/example", func(r *req.Request, res *req.Response) {
-		res.SetHeader("Content-Type", "text/plain")
-		res.Write([]byte("Hello from /example route with CSRF protection"))
-	})
-
-}
-```
-
-```go
-app.Use(middleware.LoggingMiddleware)
-app.Use(middleware.TimeoutMiddleware(2 * time.Second))
-app.Use(middleware.NewAuthMiddleware)
-```
-
-### basic plugin example
-
-```go
-package main
-
-import (
-	"github.com/BrunoCiccarino/GopherLight/plugins"
-	"github.com/BrunoCiccarino/GopherLight/req"
-	"github.com/BrunoCiccarino/GopherLight/router"
-)
-
-type MyPlugin struct{}
-
-func (p *MyPlugin) Register(route func(method string, path string, handler func(req *req.Request, res *req.Response))) {
-	route("GET", "/hello", func(req *req.Request, res *req.Response) {
-		res.Send("Hello from MyPlugin!")
-	})
-}
-
-func main() {
-	app := router.NewApp()
-	// Creating a plugin instance
-	myPlugin := &myplugin.MyPlugin{}
-	// Add the plugin to the application
-	app.AddPlugin(myPlugin)
-	// Register plugins
-	app.RegisterPlugins()
-
-}
-```
+Do you want to learn how to create APIs like a professional in a simple, fast and efficient way using our framework? Follow this link to the documentation: [link](./docs/docs.md)
 
 ### Contribute
 
