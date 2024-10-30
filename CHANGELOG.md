@@ -9,7 +9,8 @@ We are excited to announce the second version of GopherLight, bringing more flex
 
 * support for plugins that can personalize your experience developing using GopherLight
 * support more detailed error logs
-* Middlewares for authentication and CSRF protection.
+* Middlewares for authentication, CSRF protection and CORS.
+* complete documentation
 
 ```go
 type MyPlugin struct{}
@@ -47,6 +48,26 @@ func main () {
 }
 ```
 
+```go
+func HelloHandler(req *req.Request, res *req.Response) {
+	res.Send("Hello, World!")
+}
+
+func main() {
+
+	app := router.NewApp()
+
+	// Use the cors middleware
+	app.Use(middleware.CORSMiddleware(middleware.DefaultCORSOptions))
+
+	// Register routes
+	app.Get("/hello", HelloHandler)
+
+	fmt.Println("Server listening on port 3333")
+	app.Listen(":3333")
+}
+```
+
 ### 🛠️ Improvements
 
 * Improvement in routes, with support for standard http methods such as get, put, post, delete.
@@ -60,7 +81,7 @@ app.Get("/hello", func(r *req.Request, w *req.Response) {
 ### 🚀 What’s Next?
 * next func
 * proxy support
-* More complete documentation
+* Hexagonal architecture
 
 ### GopherLight v0.2 Release Notes
 🚀 GopherLight v0.2 - Enhanced Routing and Middleware Support!
