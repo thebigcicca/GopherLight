@@ -7,7 +7,6 @@ toolchain go1.22.5
 require (
 	github.com/golang-jwt/jwt/v4 v4.5.0
 	github.com/stretchr/testify v1.9.0
-	golang.org/x/exp v0.0.0-20241009180824-f66d83c29e7c
 )
 
 require (
