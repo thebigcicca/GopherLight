@@ -136,11 +136,11 @@ func (a *App) Listen(addr string) error {
 		defer cancel()
 
 		if err := srv.Shutdown(ctx); err != nil {
-			return fmt.Errorf("server shutdown failed: %v", err)
+			return fmt.Errorf("server shutdown failed: %w", err)
 		}
 		log.Println("Server gracefully stopped.")
 		return nil
 	case err := <-serverError:
-		return fmt.Errorf("server error: %v", err)
+		return fmt.Errorf("server error: %w", err)
 	}
 }
