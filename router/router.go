@@ -44,7 +44,7 @@ func (a *App) RegisterPlugins() {
 	}
 }
 
-func (a *App) Route(method string, path string, handler func(req *req.Request, res *req.Response)) {
+func (a *App) Route(method, path string, handler func(req *req.Request, res *req.Response)) {
 	if a.routes[path] == nil {
 		a.routes[path] = make(map[string]http.HandlerFunc)
 	}
@@ -83,9 +83,11 @@ func (a *App) Delete(path string, handler func(req *req.Request, res *req.Respon
 func (a *App) Patch(path string, handler func(req *req.Request, res *req.Response)) {
 	a.Route(http.MethodPatch, path, handler)
 }
+
 func (a *App) Options(path string, handler func(req *req.Request, res *req.Response)) {
 	a.Route(http.MethodOptions, path, handler)
 }
+
 func (a *App) Head(path string, handler func(req *req.Request, res *req.Response)) {
 	a.Route(http.MethodHead, path, handler)
 }
@@ -93,6 +95,7 @@ func (a *App) Head(path string, handler func(req *req.Request, res *req.Response
 func (a *App) Connect(path string, handler func(req *req.Request, res *req.Response)) {
 	a.Route(http.MethodConnect, path, handler)
 }
+
 func (a *App) Trace(path string, handler func(req *req.Request, res *req.Response)) {
 	a.Route(http.MethodTrace, path, handler)
 }

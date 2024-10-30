@@ -14,7 +14,6 @@ func HelloHandler(req *req.Request, res *req.Response) {
 }
 
 func main() {
-
 	app := router.NewApp()
 
 	// Use the cors middleware
