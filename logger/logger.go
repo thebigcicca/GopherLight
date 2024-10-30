@@ -3,7 +3,6 @@ package logger
 import (
 	"log"
 	"net/http"
-	"os"
 	"time"
 )
 
@@ -45,6 +44,5 @@ func CheckCriticalError(err error, context string) {
 func CheckFatalError(err error, context string) {
 	if err != nil {
 		log.Fatalf("[FATAL] %s: %v", context, err)
-		os.Exit(1)
 	}
 }
