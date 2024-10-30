@@ -7,7 +7,6 @@ import (
 )
 
 func TestCSRFMiddleware(t *testing.T) {
-
 	validToken := GenerateCSRFToken()
 	isValidToken := func(token string) bool {
 		return token == validToken

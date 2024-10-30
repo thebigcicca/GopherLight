@@ -25,7 +25,6 @@ func TestCORSMiddlewareDefaultOptions(t *testing.T) {
 	assert.Equal(t, "", recorder.Header().Get("Access-Control-Expose-Headers"))
 	assert.Equal(t, "600", recorder.Header().Get("Access-Control-Max-Age"))
 	assert.Equal(t, "GET,HEAD,DELETE,OPTIONS,PATCH,POST", recorder.Header().Get("Access-Control-Allow-Methods"))
-
 }
 
 func TestCORSMiddlewareOriginNotAllowed(t *testing.T) {

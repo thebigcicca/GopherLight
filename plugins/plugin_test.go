@@ -18,7 +18,7 @@ type MockRouter struct {
 	registeredRoutes map[string]func(req *req.Request, res *MockResponse)
 }
 
-func (m *MockRouter) Route(method string, path string, handler func(req *req.Request, res *MockResponse)) {
+func (m *MockRouter) Route(method, path string, handler func(req *req.Request, res *MockResponse)) {
 	if m.registeredRoutes == nil {
 		m.registeredRoutes = make(map[string]func(req *req.Request, res *MockResponse))
 	}
@@ -27,7 +27,7 @@ func (m *MockRouter) Route(method string, path string, handler func(req *req.Req
 
 type MockPlugin struct{}
 
-func (p *MockPlugin) Register(route func(method string, path string, handler func(req *req.Request, res *MockResponse))) {
+func (p *MockPlugin) Register(route func(method, path string, handler func(req *req.Request, res *MockResponse))) {
 	route("GET", "/mock-plugin-route", func(req *req.Request, res *MockResponse) {
 		res.Send("Mock Plugin Route")
 	})

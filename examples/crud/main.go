@@ -25,8 +25,10 @@ type User struct {
 	Age  int    `json:"age"`
 }
 
-var users = make(map[int]User)
-var nextID = 1
+var (
+	users  = make(map[int]User)
+	nextID = 1
+)
 
 // CreateUser adds a new user to the system.
 //
