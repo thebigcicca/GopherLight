@@ -12,7 +12,7 @@ import (
 func TestAppRouteGET(t *testing.T) {
 	app := NewApp()
 
-	app.Route("GET", "/test", func(req *req.Request, res *req.Response) {
+	app.Get("/test", func(req *req.Request, res *req.Response) {
 		res.Send("GET Response")
 	})
 
@@ -34,7 +34,7 @@ func TestAppRouteGET(t *testing.T) {
 func TestAppRoutePOST(t *testing.T) {
 	app := NewApp()
 
-	app.Route("POST", "/test", func(req *req.Request, res *req.Response) {
+	app.Post("/test", func(req *req.Request, res *req.Response) {
 		res.Send("POST Response")
 	})
 
@@ -56,7 +56,7 @@ func TestAppRoutePOST(t *testing.T) {
 func TestAppRoutePUT(t *testing.T) {
 	app := NewApp()
 
-	app.Route("PUT", "/test", func(req *req.Request, res *req.Response) {
+	app.Put("/test", func(req *req.Request, res *req.Response) {
 		res.Send("PUT Response")
 	})
 
@@ -78,7 +78,7 @@ func TestAppRoutePUT(t *testing.T) {
 func TestAppRouteDELETE(t *testing.T) {
 	app := NewApp()
 
-	app.Route("DELETE", "/test", func(req *req.Request, res *req.Response) {
+	app.Delete("/test", func(req *req.Request, res *req.Response) {
 		res.Send("DELETE Response")
 	})
 
@@ -100,7 +100,7 @@ func TestAppRouteDELETE(t *testing.T) {
 func TestAppRoutePATCH(t *testing.T) {
 	app := NewApp()
 
-	app.Route("PATCH", "/test", func(req *req.Request, res *req.Response) {
+	app.Patch("/test", func(req *req.Request, res *req.Response) {
 		res.Send("PATCH Response")
 	})
 
@@ -135,7 +135,7 @@ func TestAppRouteNotFound(t *testing.T) {
 func TestAppRouteMethodNotAllowed(t *testing.T) {
 	app := NewApp()
 
-	app.Route("GET", "/test", func(req *req.Request, res *req.Response) {
+	app.Get("/test", func(req *req.Request, res *req.Response) {
 		res.Send("GET Response")
 	})
 
