@@ -5,5 +5,5 @@ import (
 )
 
 type Plugin interface {
-	Register(route func(method, path string, handler func(req *req.Request, res *req.Response)))
+	Register(route func(method, path string, handler req.Handler))
 }
