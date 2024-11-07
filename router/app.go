@@ -44,7 +44,7 @@ func (a *App) RegisterPlugins() {
 	}
 }
 
-func (a *App) Route(method, path string, handler func(req *req.Request, res *req.Response)) {
+func (a *App) Route(method, path string, handler req.Handler) {
 	if a.routes[path] == nil {
 		a.routes[path] = make(map[string]http.HandlerFunc)
 	}
@@ -64,39 +64,39 @@ func (a *App) Route(method, path string, handler func(req *req.Request, res *req
 	a.routes[path][method] = h
 }
 
-func (a *App) Get(path string, handler func(req *req.Request, res *req.Response)) {
+func (a *App) Get(path string, handler req.Handler) {
 	a.Route(http.MethodGet, path, handler)
 }
 
-func (a *App) Post(path string, handler func(req *req.Request, res *req.Response)) {
+func (a *App) Post(path string, handler req.Handler) {
 	a.Route(http.MethodPost, path, handler)
 }
 
-func (a *App) Put(path string, handler func(req *req.Request, res *req.Response)) {
+func (a *App) Put(path string, handler req.Handler) {
 	a.Route(http.MethodPut, path, handler)
 }
 
-func (a *App) Delete(path string, handler func(req *req.Request, res *req.Response)) {
+func (a *App) Delete(path string, handler req.Handler) {
 	a.Route(http.MethodDelete, path, handler)
 }
 
-func (a *App) Patch(path string, handler func(req *req.Request, res *req.Response)) {
+func (a *App) Patch(path string, handler req.Handler) {
 	a.Route(http.MethodPatch, path, handler)
 }
 
-func (a *App) Options(path string, handler func(req *req.Request, res *req.Response)) {
+func (a *App) Options(path string, handler req.Handler) {
 	a.Route(http.MethodOptions, path, handler)
 }
 
-func (a *App) Head(path string, handler func(req *req.Request, res *req.Response)) {
+func (a *App) Head(path string, handler req.Handler) {
 	a.Route(http.MethodHead, path, handler)
 }
 
-func (a *App) Connect(path string, handler func(req *req.Request, res *req.Response)) {
+func (a *App) Connect(path string, handler req.Handler) {
 	a.Route(http.MethodConnect, path, handler)
 }
 
-func (a *App) Trace(path string, handler func(req *req.Request, res *req.Response)) {
+func (a *App) Trace(path string, handler req.Handler) {
 	a.Route(http.MethodTrace, path, handler)
 }
 
