@@ -148,3 +148,25 @@ func TestAppRouteMethodNotAllowed(t *testing.T) {
 		t.Fatalf("Expected status %d, got %d", http.StatusMethodNotAllowed, w.Code)
 	}
 }
+
+func TestAppRouteNested(t *testing.T) {
+	app := NewApp()
+
+	app.Get("/users/profile", func(req *req.Request, res *req.Response) {
+		res.Send("User Profile Response")
+	})
+
+	req := httptest.NewRequest("GET", "/users/profile", nil)
+	w := httptest.NewRecorder()
+
+	app.ServeHTTP(w, req)
+
+	if w.Code != http.StatusOK {
+		t.Fatalf("Expected status %d, got %d", http.StatusOK, w.Code)
+	}
+
+	expectedBody := "User Profile Response"
+	if w.Body.String() != expectedBody {
+		t.Fatalf("Expected body '%s', got '%s'", expectedBody, w.Body.String())
+	}
+}
